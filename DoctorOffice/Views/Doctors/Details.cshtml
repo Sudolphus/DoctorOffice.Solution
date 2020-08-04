@@ -18,7 +18,13 @@ else
   <ul>
     @foreach(var join in Model.Patients)
     {
-      <li>@Html.ActionLink($"{join.Patient.Name}", "Details", "Patients", new { id = @join.Patient.PatientId })</li>
+      <li>@Html.ActionLink($"{join.Patient.Name}", "Details", "Patients", new { id = @join.Patient.PatientId })</li> 
+      @using (Html.BeginForm("DeletePatient", "Doctors")) //deletepatient reference from doctorscontroller
+      {
+        @Html.Hidden("joinId", @join.DoctorPatientSpecialtyId) //joinId breaking relationship in join table
+        @Html.Hidden("doctorId", Model.DoctorId);
+        <input type="submit" value="Remove Patient From This Doctor" />
+      }
     }
   </ul>
 }
@@ -34,6 +40,12 @@ else
     @foreach(var join in Model.Specialties)
     {
       <li>@Html.ActionLink($"{join.Specialty.Type}", "Details", "Specialties", new { id = @join.Specialty.SpecialtyId })</li>
+      @using (Html.BeginForm("DeleteSpecialty", "Doctors"))
+      {
+        @Html.Hidden("joinId", @join.DoctorPatientSpecialtyId)
+        @Html.Hidden("doctorId", Model.DoctorId);
+        <input type="submit" value="Remove This Specialty" />
+      }
     }
   </ul>
 }
