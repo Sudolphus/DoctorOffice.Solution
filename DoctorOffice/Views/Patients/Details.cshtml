@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorOffice.Models.Patient
+
+<h1>Patient Details</h1>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+@Html.DisplayNameFor(model => model.Birthday): @Html.DisplayFor(model => model.Birthday)
+
+@if (@Model.Doctors.Count == 0)
+{
+  <p>This patient is not assinged to any doctors</p>
+}
+else
+{
+  <h3>Doctors: </h3>
+  <ul>
+    @foreach(var join in Module.Doctors)
+    {
+      <li>@Html.ActionLink($"{join.Doctor.Name}", "Details", new {id = join.Doctor.DoctorId})</li>
+    }
+  </ul>
+}
+
+
+<p>@Html.ActionLink("Patient's Index", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
