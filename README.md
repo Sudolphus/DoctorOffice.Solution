@@ -138,10 +138,3 @@ _**None as of:** 8/4/2020_
 | [<img src="https://coding-assets.s3-us-west-2.amazonaws.com/micheal-hansen.jpg" width="160px;"/><br /><sub><b>Micheal Hansen</b></sub>](https://www.linkedin.com/in/michealhansen/)<br /> |
 | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | [<img src="https://coding-assets.s3-us-west-2.amazonaws.com/img/tristan_emmerson.jpg" width="160px;"/><br /><sub><b>Tristan Emmerson</b></sub>](https://www.linkedin.com/in/tristan-emmerson/)<br /> |
-
-<br>
-
-## **📘License**
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-Copyright (c) 2020 **_Tristan Emmerson, Stickerslug Inc._**
