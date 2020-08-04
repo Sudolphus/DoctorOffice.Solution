@@ -8,7 +8,7 @@
 <hr />
 <h2>@Html.DisplayFor(model => model.Name)</h2>
 
-@if(@Model.Patients.Count == 0)
+@if(@Model.PatientsSpecialties.Count() == 0)
 {
   <p>nobody wants this guy to fix their boo-boos</p>
 }
@@ -16,7 +16,7 @@ else
 {
   <h4>Current Patients:</h4>
   <ul>
-    @foreach(var join in Model.Patients)
+    @foreach(var join in Model.PatientsSpecialties)
     {
       <li>@Html.ActionLink($"{join.Patient.Name}", "Details", "Patients", new { id = @join.Patient.PatientId })</li> 
       @using (Html.BeginForm("DeletePatient", "Doctors")) //deletepatient reference from doctorscontroller
@@ -29,7 +29,7 @@ else
   </ul>
 }
 
-@if(@Model.Specialties.Count == 0)
+@if(@Model.PatientsSpecialties.Count() == 0)
 {
   <p>This guy is completely unspecial</p>
 }
@@ -37,7 +37,7 @@ else
 {
   <h4>Specialties: </h4>
   <ul>
-    @foreach(var join in Model.Specialties)
+    @foreach(var join in Model.PatientsSpecialties)
     {
       <li>@Html.ActionLink($"{join.Specialty.Type}", "Details", "Specialties", new { id = @join.Specialty.SpecialtyId })</li>
       @using (Html.BeginForm("DeleteSpecialty", "Doctors"))
