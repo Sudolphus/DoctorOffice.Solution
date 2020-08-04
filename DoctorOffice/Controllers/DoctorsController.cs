@@ -90,5 +90,23 @@ namespace DoctorOffice.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public ActionResult DeletePatient(int joinId, int doctorId)
+    {
+      var joinEntry = _db.DoctorPatientSpecialty.FirstOrDefault(entry => entry.DoctorPatientSpecialtyId == joinId);
+      _db.DoctorPatientSpecialty.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = doctorId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteSpecialty(int joinId, int doctorId)
+    {
+      var joinEntry = _db.DoctorPatientSpecialty.FirstOrDefault(entry => entry.DoctorPatientSpecialtyId == joinId);
+      _db.DoctorPatientSpecialty.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = doctorId });
+    }
   }
 }
