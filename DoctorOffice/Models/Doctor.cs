@@ -10,7 +10,7 @@ namespace DoctorOffice.Models
 
     public Doctor()
     {
-      this.PatientSpecialties = new HashSet<DoctorPatientSpecialty>();
+      this.PatientsSpecialties = new HashSet<DoctorPatientSpecialty>();
     }
   }
 }
