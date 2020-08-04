@@ -1,0 +1,42 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorOffice.Models.Doctor
+
+<h1>Doctor Details</h1>
+<hr />
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+@if(@Model.Patients.Count == 0)
+{
+  <p>nobody wants this guy to fix their boo-boos</p>
+}
+else
+{
+  <h4>Current Patients:</h4>
+  <ul>
+    @foreach(var join in Model.Patients)
+    {
+      <li>@Html.ActionLink($"{join.Patient.Name}", "Details", "Patients", new { id = @join.Patient.PatientId })</li>
+    }
+  </ul>
+}
+
+@if(@Model.Specialties.Count == 0)
+{
+  <p>This guy is completely unspecial</p>
+}
+else
+{
+  <h4>Specialties: </h4>
+  <ul>
+    @foreach(var join in Model.Specialties)
+    {
+      <li>@Html.ActionLink($"{join.Specialty.Type}", "Details", "Specialties", new { id = @join.Specialty.SpecialtyId })</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Doctor's List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
