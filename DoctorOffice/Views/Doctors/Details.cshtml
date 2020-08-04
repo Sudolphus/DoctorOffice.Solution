@@ -19,9 +19,9 @@ else
     @foreach(var join in Model.PatientsSpecialties)
     {
       <li>@Html.ActionLink($"{join.Patient.Name}", "Details", "Patients", new { id = @join.Patient.PatientId })</li> 
-      @using (Html.BeginForm("DeletePatient", "Doctors")) //deletepatient reference from doctorscontroller
+      @using (Html.BeginForm("DeletePatient", "Doctors"))
       {
-        @Html.Hidden("joinId", @join.DoctorPatientSpecialtyId) //joinId breaking relationship in join table
+        @Html.Hidden("joinId", @join.DoctorPatientSpecialtyId) 
         @Html.Hidden("doctorId", Model.DoctorId);
         <input type="submit" value="Remove Patient From This Doctor" />
       }
