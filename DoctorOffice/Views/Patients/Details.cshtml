@@ -17,7 +17,7 @@ else
 {
   <h3>Doctors: </h3>
   <ul>
-    @foreach(var join in Module.Doctors)
+    @foreach(var join in Model.Doctors)
     {
       <li>@Html.ActionLink($"{join.Doctor.Name}", "Details", new {id = join.Doctor.DoctorId})</li>
     }
