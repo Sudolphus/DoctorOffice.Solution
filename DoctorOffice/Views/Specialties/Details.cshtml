@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorOffice.Models.Specialty
+
+<h1>Specialty Details</h1>
+<hr />
+<h2>@Html.DisplayFor(model => model.Type)</h2>
+
+@if(@Model.Specialties.Count == 0)
+{
+  <p>There are no doctors with this specialty in the database.</p>
+}
+else
+{
+  <h4>Doctors:</h4>
+  <ul>
+    @foreach (var join in Model.Doctors)
+    {
+        <li>@Html.ActionLink($"{join.Doctor.Name}", "Details", "Specialties", new { id = @join.Doctor.DoctorId })</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit This Specialty", "Edit", new { id = Model.SpecialtyId })</p>
+<p>@Html.ActionLink("Delete This Specialty", "Delete", new { id = Model.SpecialtyId })</p>
+<p>@Html.ActionLink("Specialties List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
