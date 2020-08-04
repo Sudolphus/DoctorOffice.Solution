@@ -13,6 +13,11 @@
 }
 else
 {
+  <form asp-controller="Patients" asp-action="Index">
+    <label for="patientName">Filter By Name</label>
+    <input type="text" name="patientName" id="patientName" />
+    <input type="submit" value="Filter" />
+  </form>
   <ul>
   @foreach(Patient patient in Model)
   {
