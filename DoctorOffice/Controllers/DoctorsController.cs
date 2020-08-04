@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DoctorOffice.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace DoctorOffice.Controllers
 {
@@ -15,9 +17,15 @@ namespace DoctorOffice.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(string docName) //passing in docName for query building filtering doctors by search
     {
-      List<Doctor> model = _db.Doctors.ToList();
+      IQueryable<Doctor> doctorQuery = _db.Doctors;
+      if (!string.IsNullOrEmpty(docName)) //if no string has been typed to filter by, then the alphabetical list is autopopulated
+      {
+        Regex search = new Regex(docName, RegexOptions.IgnoreCase); //replaces auto-populated alphabetical list with string search results
+        doctorQuery = doctorQuery.Where(doctors => search.IsMatch(doctors.Name)); //matches user search string against doctor names if they contain string
+      }
+      IEnumerable<Doctor> model = doctorQuery.ToList().OrderBy(doctor => doctor.Name); //adjusting from list to IEnumerable allows us to use OrderBy method and sort alphabetically
       return View(model);
     }
 
@@ -47,6 +55,8 @@ namespace DoctorOffice.Controllers
     public ActionResult Edit()
     {
       var thisDoctor = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
+      ViewBag.PatientId = new SelectList(_db.Patients, "PatientId", "Name"); //allows us to pass in patient id to iterate but to display name rather than id in select list line 16-20 of views/doctor/edit
+      ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyId", "Type"); //same as above but for specialties of the doctor
       return View(thisDoctor);
     }
 
