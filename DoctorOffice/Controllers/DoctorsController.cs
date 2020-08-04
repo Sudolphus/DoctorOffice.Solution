@@ -47,12 +47,13 @@ namespace DoctorOffice.Controllers
       var thisDoctor = _db.Doctors
         .Include(doctor => doctor.PatientsSpecialties)
           .ThenInclude(join => join.Patient)
-          .AlsoInclude(join => join.Specialty)
+        .Include(doctor => doctor.PatientsSpecialties)
+          .ThenInclude(join => join.Specialty)
         .FirstOrDefault(doctor => doctor.DoctorId == id);
       return View(thisDoctor);
     }
 
-    public ActionResult Edit()
+    public ActionResult Edit(int id)
     {
       var thisDoctor = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
       ViewBag.PatientId = new SelectList(_db.Patients, "PatientId", "Name"); //allows us to pass in patient id to iterate but to display name rather than id in select list line 16-20 of views/doctor/edit
