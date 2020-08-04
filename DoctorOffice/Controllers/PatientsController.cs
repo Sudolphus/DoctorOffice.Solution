@@ -52,7 +52,7 @@ namespace DoctorOffice.Controllers
 
     public ActionResult Edit(int id)
     {
-      var thisPatient = _db.Patients.FirstOrDefault(patients => patients.Id == id);
+      var thisPatient = _db.Patients.FirstOrDefault(patients => patients.PatientId == id);
       ViewBag.DoctorId = new SelectList(_db.Doctors, "DoctorId", "Name");
       return View(thisPatient);
     }
